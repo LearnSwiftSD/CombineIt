@@ -47,6 +47,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48546371230A54F3005AAD9D /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				48AE333723091EA200226DBB /* ColorRetrievable.swift */,
+				48AE333923091F1C00226DBB /* ColorFav.swift */,
+				48AE333B23091FA500226DBB /* ColorHelper.swift */,
+				48AE333D23091FC300226DBB /* Fonts.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		4872E2542309224800E28617 /* ColorScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,11 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				4872E2552309228D00E28617 /* AppFiles */,
+				48546371230A54F3005AAD9D /* SupportingFiles */,
 				4872E2542309224800E28617 /* ColorScene */,
-				48AE333723091EA200226DBB /* ColorRetrievable.swift */,
-				48AE333923091F1C00226DBB /* ColorFav.swift */,
-				48AE333B23091FA500226DBB /* ColorHelper.swift */,
-				48AE333D23091FC300226DBB /* Fonts.swift */,
 			);
 			path = "Combine Colors";
 			sourceTree = "<group>";
