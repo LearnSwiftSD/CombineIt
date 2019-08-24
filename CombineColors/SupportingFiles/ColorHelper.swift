@@ -11,17 +11,25 @@ import UIKit
 struct ColorHelper {
     
     static func toHexRGB(r: Int, g: Int, b: Int) -> String{
-        let hexR = (hexConvert(r) ?? "<r: value out of bounds>")
-        let hexG = (hexConvert(g) ?? "<g: value out of bounds>")
-        let hexB = (hexConvert(b) ?? "<b: value out of bounds>")
+        let hexR = toHex(colorValue: r)
+        let hexG = toHex(colorValue: g)
+        let hexB = toHex(colorValue: b)
         return hexR + hexG + hexB
     }
     
-    static func toDecimal(r: Float, g: Float, b: Float) -> (red: Int, green: Int, blue: Int) {
-        let decimalR = Int(r * 255)
-        let decimalG = Int(g * 255)
-        let decimalB = Int(b * 255)
+    static func toHex(colorValue: Int) -> String {
+        return (hexConvert(colorValue) ?? "<value out of bounds>")
+    }
+    
+    static func toDecimalRGB(r: Float, g: Float, b: Float) -> (red: Int, green: Int, blue: Int) {
+        let decimalR = toDecimal(colorValue: r)
+        let decimalG = toDecimal(colorValue: g)
+        let decimalB = toDecimal(colorValue: b)
         return (decimalR, decimalG, decimalB)
+    }
+    
+    static func toDecimal(colorValue: Float) -> Int {
+        return Int(colorValue * 255)
     }
     
     private static func hexConvert(_ num: Int) -> String?{

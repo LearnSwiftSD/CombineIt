@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48061820230A76DC00D3C7EB /* Combinable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806181F230A76DC00D3C7EB /* Combinable.swift */; };
+		48061822230A776600D3C7EB /* CombinableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48061821230A776600D3C7EB /* CombinableExtensions.swift */; };
 		4856D0102309275000C5CD2D /* Color.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48AE333123091C7100226DBB /* Color.storyboard */; };
 		48AE331E23091C0D00226DBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE331D23091C0D00226DBB /* AppDelegate.swift */; };
 		48AE332023091C0D00226DBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE331F23091C0D00226DBB /* SceneDelegate.swift */; };
@@ -21,7 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		48AE331A23091C0D00226DBB /* Combine Colors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Combine Colors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4806181F230A76DC00D3C7EB /* Combinable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combinable.swift; sourceTree = "<group>"; };
+		48061821230A776600D3C7EB /* CombinableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinableExtensions.swift; sourceTree = "<group>"; };
+		48AE331A23091C0D00226DBB /* CombineColors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombineColors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48AE331D23091C0D00226DBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48AE331F23091C0D00226DBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		48AE332623091C0F00226DBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,7 +87,7 @@
 		48AE331123091C0D00226DBB = {
 			isa = PBXGroup;
 			children = (
-				48AE331C23091C0D00226DBB /* Combine Colors */,
+				48AE331C23091C0D00226DBB /* CombineColors */,
 				48AE331B23091C0D00226DBB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,27 +95,29 @@
 		48AE331B23091C0D00226DBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				48AE331A23091C0D00226DBB /* Combine Colors.app */,
+				48AE331A23091C0D00226DBB /* CombineColors.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		48AE331C23091C0D00226DBB /* Combine Colors */ = {
+		48AE331C23091C0D00226DBB /* CombineColors */ = {
 			isa = PBXGroup;
 			children = (
 				4872E2552309228D00E28617 /* AppFiles */,
 				48546371230A54F3005AAD9D /* SupportingFiles */,
 				4872E2542309224800E28617 /* ColorScene */,
+				4806181F230A76DC00D3C7EB /* Combinable.swift */,
+				48061821230A776600D3C7EB /* CombinableExtensions.swift */,
 			);
-			path = "Combine Colors";
+			path = CombineColors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		48AE331923091C0D00226DBB /* Combine Colors */ = {
+		48AE331923091C0D00226DBB /* CombineColors */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 48AE332E23091C0F00226DBB /* Build configuration list for PBXNativeTarget "Combine Colors" */;
+			buildConfigurationList = 48AE332E23091C0F00226DBB /* Build configuration list for PBXNativeTarget "CombineColors" */;
 			buildPhases = (
 				48AE331623091C0D00226DBB /* Sources */,
 				48AE331723091C0D00226DBB /* Frameworks */,
@@ -121,9 +127,9 @@
 			);
 			dependencies = (
 			);
-			name = "Combine Colors";
+			name = CombineColors;
 			productName = "Combine Colors";
-			productReference = 48AE331A23091C0D00226DBB /* Combine Colors.app */;
+			productReference = 48AE331A23091C0D00226DBB /* CombineColors.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -141,7 +147,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 48AE331523091C0D00226DBB /* Build configuration list for PBXProject "Combine Colors" */;
+			buildConfigurationList = 48AE331523091C0D00226DBB /* Build configuration list for PBXProject "CombineColors" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -154,7 +160,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				48AE331923091C0D00226DBB /* Combine Colors */,
+				48AE331923091C0D00226DBB /* CombineColors */,
 			);
 		};
 /* End PBXProject section */
@@ -180,11 +186,13 @@
 				48AE333E23091FC300226DBB /* Fonts.swift in Sources */,
 				48AE333823091EA200226DBB /* ColorRetrievable.swift in Sources */,
 				48AE333623091E7E00226DBB /* ColorView.swift in Sources */,
+				48061822230A776600D3C7EB /* CombinableExtensions.swift in Sources */,
 				48AE331E23091C0D00226DBB /* AppDelegate.swift in Sources */,
 				48AE333A23091F1C00226DBB /* ColorFav.swift in Sources */,
 				48AE332023091C0D00226DBB /* SceneDelegate.swift in Sources */,
 				48AE333C23091FA500226DBB /* ColorHelper.swift in Sources */,
 				48AE333423091D1900226DBB /* ColorController.swift in Sources */,
+				48061820230A76DC00D3C7EB /* Combinable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +330,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6Y8F6EN66;
-				INFOPLIST_FILE = "Combine Colors/AppFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CombineColors/AppFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -340,7 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6Y8F6EN66;
-				INFOPLIST_FILE = "Combine Colors/AppFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CombineColors/AppFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -355,7 +363,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		48AE331523091C0D00226DBB /* Build configuration list for PBXProject "Combine Colors" */ = {
+		48AE331523091C0D00226DBB /* Build configuration list for PBXProject "CombineColors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48AE332C23091C0F00226DBB /* Debug */,
@@ -364,7 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48AE332E23091C0F00226DBB /* Build configuration list for PBXNativeTarget "Combine Colors" */ = {
+		48AE332E23091C0F00226DBB /* Build configuration list for PBXNativeTarget "CombineColors" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48AE332F23091C0F00226DBB /* Debug */,

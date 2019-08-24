@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class ColorController: UIViewController {
     
@@ -25,18 +26,90 @@ class ColorController: UIViewController {
     static let sbid = "ColorSaveController"
     weak var colorRequestor: ColorRetrievable?
     
+    var cancellables = Cancellables()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = self
         setUpStyle()
         subscribeToKeyboardNotifications()
+        bindPublishers()
+    }
+    
+    func bindPublishers() {
+        
+        let redSliderValue = redSlider
+            .publisher(for: .valueChanged)
+            .map { $0.value }
+            .prepend(0.0)
+            .removeDuplicates()
+        
+        let greenSliderValue = greenSlider
+            .publisher(for: .valueChanged)
+            .map { $0.value }
+            .prepend(0.0)
+            .removeDuplicates()
+        
+        let blueSliderValue = blueSlider
+            .publisher(for: .valueChanged)
+            .map { $0.value }
+            .prepend(0.0)
+            .removeDuplicates()
+        
+        let sliderValues = Publishers
+            .CombineLatest3(
+                redSliderValue,
+                greenSliderValue,
+                blueSliderValue
+        )
+        
+        let colorName = nameField
+            .publisher(for: .editingChanged)
+            .compactMap { $0.text }
+        
+        sliderValues
+            .print("Sliders")
+            .supply(to: colorView.input.color)
+            .store(in: &cancellables)
+        
+        redSliderValue
+            .map(ColorHelper.toDecimal)
+            .map(String.init)
+            .supply(to: redValue.input.text)
+            .store(in: &cancellables)
+        
+        greenSliderValue
+            .map(ColorHelper.toDecimal)
+            .map(String.init)
+            .supply(to: greenValue.input.text)
+            .store(in: &cancellables)
+        
+        blueSliderValue
+            .map(ColorHelper.toDecimal)
+            .map(String.init)
+            .supply(to: blueValue.input.text)
+            .store(in: &cancellables)
+        
+        sliderValues
+            .map(ColorHelper.toDecimalRGB)
+            .map(ColorHelper.toHexRGB)
+            .supply(to: hexValueLabel.input.text)
+            .store(in: &cancellables)
+        
+        colorName
+            .print("Text Entered")
+            .map { $0.hasPrefix("Fav ") }
+            .removeDuplicates()
+            .map { $0 ? UIColor.green : UIColor.red }
+            .supply(to: nameField.input.textColor)
+            .store(in: &cancellables)
     }
     
     @IBAction func didChangeColor(_ sender: Any) {
-        updateUI(
-            red: redSlider.value,
-            green: greenSlider.value,
-            blue: blueSlider.value)
+//        updateUI(
+//            red: redSlider.value,
+//            green: greenSlider.value,
+//            blue: blueSlider.value)
     }
     
     
@@ -64,7 +137,7 @@ class ColorController: UIViewController {
     
     func updateUI(red: Float, green: Float, blue: Float) {
         colorView.shiftTo(red, green, blue)
-        let decimal = ColorHelper.toDecimal(r: red, g: green, b: blue)
+        let decimal = ColorHelper.toDecimalRGB(r: red, g: green, b: blue)
         self.redValue.text = String(decimal.red)
         self.greenValue.text = String(decimal.green)
         self.blueValue.text = String(decimal.blue)

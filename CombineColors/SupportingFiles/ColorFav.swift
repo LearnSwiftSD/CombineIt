@@ -18,7 +18,7 @@ struct FavColor {
     var timeStamp = Date().timeIntervalSinceReferenceDate
     
     var hex: String {
-        let my = ColorHelper.toDecimal(r: red, g: green, b: blue)
+        let my = ColorHelper.toDecimalRGB(r: red, g: green, b: blue)
         return ColorHelper.toHexRGB(r: my.red, g: my.green, b: my.blue)
     }
     
