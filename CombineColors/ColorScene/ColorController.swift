@@ -81,6 +81,20 @@ class ColorController: UIViewController {
             .eraseToAnyPublisher()
     }
     
+    var keyboardWillShowNotification: AnyPublisher<Notification, Never> {
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillShowNotification)
+            .print("keyboardWillShow")
+            .eraseToAnyPublisher()
+    }
+    
+    var keyboardWillHideNotification: AnyPublisher<Notification, Never> {
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillHideNotification)
+            .print("keyboardWillHide")
+            .eraseToAnyPublisher()
+    }
+    
     // MARK: - Subscriptions
     
     func bindPublishers() {
@@ -119,13 +133,11 @@ class ColorController: UIViewController {
             .supply(to: nameField.input.textColor)
             .store(in: &cancellables)
         
-        NotificationCenter.default
-            .publisher(for: UIResponder.keyboardWillShowNotification)
+        keyboardWillShowNotification
             .supply(to: keyboardWillShow)
             .store(in: &cancellables)
  
-        NotificationCenter.default
-            .publisher(for: UIResponder.keyboardWillHideNotification)
+        keyboardWillHideNotification
             .supply(to: keyboardWillHide)
             .store(in: &cancellables)
     }
