@@ -1,6 +1,6 @@
 //
 //  Color.swift
-//  Combine Colors
+//  CombineColors
 //
 //  Created by Stephen Martinez on 8/17/19.
 //  Copyright © 2019 Stephen Martinez. All rights reserved.

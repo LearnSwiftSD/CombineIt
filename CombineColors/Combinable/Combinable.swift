@@ -109,3 +109,5 @@ public extension Combinable where Self: UIControl {
 
 /// Handy Dandy alias for `Set<AnyCancellable>` 😁
 typealias Cancellables = Set<AnyCancellable>
+
+typealias SharedPublisher<Output, Failure: Error> = Publishers.Share<AnyPublisher<Output, Failure>>

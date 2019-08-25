@@ -23,11 +23,12 @@ class ColorController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
+    let textFieldHandler = TextFieldHandler()
     var cancellables = Cancellables()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameField.delegate = self
+        nameField.delegate = textFieldHandler
         setUpStyle()
         //subscribeToKeyboardNotifications()
         bindPublishers()
@@ -35,7 +36,7 @@ class ColorController: UIViewController {
     
     // MARK: - Publishers
     
-    lazy var redSliderValue: Publishers.Share<AnyPublisher<Float, Never>> = {
+    lazy var redSliderValue: SharedPublisher<Float, Never> = {
         redSlider.publisher(for: .valueChanged)
             .map { $0.value }
             .prepend(0.0)
@@ -44,7 +45,7 @@ class ColorController: UIViewController {
             .share()
     }()
     
-    lazy var greenSliderValue: Publishers.Share<AnyPublisher<Float, Never>> = {
+    lazy var greenSliderValue: SharedPublisher<Float, Never> = {
         greenSlider.publisher(for: .valueChanged)
             .map { $0.value }
             .prepend(0.0)
@@ -53,7 +54,7 @@ class ColorController: UIViewController {
             .share()
     }()
     
-    lazy var blueSliderValue: Publishers.Share<AnyPublisher<Float, Never>> = {
+    lazy var blueSliderValue: SharedPublisher<Float, Never> = {
         blueSlider.publisher(for: .valueChanged)
             .map { $0.value }
             .prepend(0.0)
@@ -62,7 +63,7 @@ class ColorController: UIViewController {
             .share()
     }()
     
-    lazy var sliderValues: Publishers.Share<AnyPublisher<Color.Values, Never>> = {
+    lazy var sliderValues: SharedPublisher<Color.Values, Never> = {
         Publishers.CombineLatest3(
             redSliderValue,
             greenSliderValue,
@@ -167,16 +168,6 @@ class ColorController: UIViewController {
         hexValueLabel.text = colorValues.hex
     }
     
-}
-
-// MARK: - Textfield Management
-extension ColorController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
 }
 
 // MARK: - Keyboard Management
