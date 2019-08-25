@@ -40,18 +40,21 @@ class ColorController: UIViewController {
             .map { $0.value }
             .prepend(0.0)
             .removeDuplicates()
+            .share()
         
         let greenSliderValue = greenSlider
             .publisher(for: .valueChanged)
             .map { $0.value }
             .prepend(0.0)
             .removeDuplicates()
+            .share()
         
         let blueSliderValue = blueSlider
             .publisher(for: .valueChanged)
             .map { $0.value }
             .prepend(0.0)
             .removeDuplicates()
+            .share()
         
         let sliderValues = Publishers
             .CombineLatest3(
@@ -61,6 +64,7 @@ class ColorController: UIViewController {
             )
             .print("Sliders")
             .map(Color.Values.init)
+            .share()
         
         let colorName = nameField
             .publisher(for: .editingChanged)
