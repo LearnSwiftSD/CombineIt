@@ -23,9 +23,6 @@ class ColorController: UIViewController {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
-    static let sbid = "ColorSaveController"
-    weak var colorRequestor: ColorRetrievable?
-    
     var cancellables = Cancellables()
     
     override func viewDidLoad() {
@@ -61,38 +58,38 @@ class ColorController: UIViewController {
                 redSliderValue,
                 greenSliderValue,
                 blueSliderValue
-        )
+            )
+            .print("Sliders")
+            .map(Color.Values.init)
         
         let colorName = nameField
             .publisher(for: .editingChanged)
             .compactMap { $0.text }
         
         sliderValues
-            .print("Sliders")
             .supply(to: colorView.input.color)
             .store(in: &cancellables)
         
         redSliderValue
-            .map(ColorHelper.toDecimal)
+            .map(Color.toDecimal)
             .map(String.init)
             .supply(to: redValue.input.text)
             .store(in: &cancellables)
         
         greenSliderValue
-            .map(ColorHelper.toDecimal)
+            .map(Color.toDecimal)
             .map(String.init)
             .supply(to: greenValue.input.text)
             .store(in: &cancellables)
         
         blueSliderValue
-            .map(ColorHelper.toDecimal)
+            .map(Color.toDecimal)
             .map(String.init)
             .supply(to: blueValue.input.text)
             .store(in: &cancellables)
         
         sliderValues
-            .map(ColorHelper.toDecimalRGB)
-            .map(ColorHelper.toHexRGB)
+            .map { $0.hex }
             .supply(to: hexValueLabel.input.text)
             .store(in: &cancellables)
         
@@ -112,20 +109,6 @@ class ColorController: UIViewController {
 //            blue: blueSlider.value)
     }
     
-    
-    @IBAction func cancelColor(_ sender: Any) {
-    
-    }
-    
-    @IBAction func saveColor(_ sender: Any) {
-        let color = FavColor(
-            r: redSlider.value,
-            g: greenSlider.value,
-            b: blueSlider.value,
-            name: nameField.text)
-        colorRequestor?.didSave(color: color)
-    }
-    
     func setUpStyle() {
         let pHolderText = NSAttributedString(
             string: "Enter Color Name",
@@ -136,12 +119,12 @@ class ColorController: UIViewController {
     }
     
     func updateUI(red: Float, green: Float, blue: Float) {
-        colorView.shiftTo(red, green, blue)
-        let decimal = ColorHelper.toDecimalRGB(r: red, g: green, b: blue)
-        self.redValue.text = String(decimal.red)
-        self.greenValue.text = String(decimal.green)
-        self.blueValue.text = String(decimal.blue)
-        self.hexValueLabel.text = ColorHelper.toHexRGB(r: decimal.red, g: decimal.green, b: decimal.blue)
+        let colorValues = Color.Values(red: red, green: green, blue: blue)
+        colorView.shiftTo(colorValues)
+        redValue.text = String(colorValues.red)
+        greenValue.text = String(colorValues.green)
+        blueValue.text = String(colorValues.blue)
+        hexValueLabel.text = colorValues.hex
     }
     
 }

@@ -17,11 +17,14 @@ class ColorView: UIView {
         layer.borderColor = UIColor.white.cgColor
     }
     
-    func shiftTo(_ red: Float, _ green: Float, _ blue: Float) {
-        let r = CGFloat(red)
-        let g = CGFloat(green)
-        let b = CGFloat(blue)
-        backgroundColor = UIColor(red: r, green: g, blue: b, alpha: 1)
+    func shiftTo(_ colorValue: Color.Values) {
+        let floats = colorValue.float
+        backgroundColor = UIColor(
+            red: CGFloat(floats.red),
+            green: CGFloat(floats.green),
+            blue: CGFloat(floats.blue),
+            alpha: 1
+        )
     }
     
 }

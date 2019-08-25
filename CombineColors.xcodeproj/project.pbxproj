@@ -16,9 +16,7 @@
 		48AE332A23091C0F00226DBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48AE332823091C0F00226DBB /* LaunchScreen.storyboard */; };
 		48AE333423091D1900226DBB /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333323091D1900226DBB /* ColorController.swift */; };
 		48AE333623091E7E00226DBB /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333523091E7E00226DBB /* ColorView.swift */; };
-		48AE333823091EA200226DBB /* ColorRetrievable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333723091EA200226DBB /* ColorRetrievable.swift */; };
-		48AE333A23091F1C00226DBB /* ColorFav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333923091F1C00226DBB /* ColorFav.swift */; };
-		48AE333C23091FA500226DBB /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333B23091FA500226DBB /* ColorHelper.swift */; };
+		48AE333C23091FA500226DBB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333B23091FA500226DBB /* Color.swift */; };
 		48AE333E23091FC300226DBB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE333D23091FC300226DBB /* Fonts.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +32,7 @@
 		48AE333123091C7100226DBB /* Color.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Color.storyboard; sourceTree = "<group>"; };
 		48AE333323091D1900226DBB /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
 		48AE333523091E7E00226DBB /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
-		48AE333723091EA200226DBB /* ColorRetrievable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRetrievable.swift; sourceTree = "<group>"; };
-		48AE333923091F1C00226DBB /* ColorFav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFav.swift; sourceTree = "<group>"; };
-		48AE333B23091FA500226DBB /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
+		48AE333B23091FA500226DBB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		48AE333D23091FC300226DBB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,9 +50,7 @@
 		48546371230A54F3005AAD9D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				48AE333723091EA200226DBB /* ColorRetrievable.swift */,
-				48AE333923091F1C00226DBB /* ColorFav.swift */,
-				48AE333B23091FA500226DBB /* ColorHelper.swift */,
+				48AE333B23091FA500226DBB /* Color.swift */,
 				48AE333D23091FC300226DBB /* Fonts.swift */,
 			);
 			path = SupportingFiles;
@@ -184,13 +178,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				48AE333E23091FC300226DBB /* Fonts.swift in Sources */,
-				48AE333823091EA200226DBB /* ColorRetrievable.swift in Sources */,
 				48AE333623091E7E00226DBB /* ColorView.swift in Sources */,
 				48061822230A776600D3C7EB /* CombinableExtensions.swift in Sources */,
 				48AE331E23091C0D00226DBB /* AppDelegate.swift in Sources */,
-				48AE333A23091F1C00226DBB /* ColorFav.swift in Sources */,
 				48AE332023091C0D00226DBB /* SceneDelegate.swift in Sources */,
-				48AE333C23091FA500226DBB /* ColorHelper.swift in Sources */,
+				48AE333C23091FA500226DBB /* Color.swift in Sources */,
 				48AE333423091D1900226DBB /* ColorController.swift in Sources */,
 				48061820230A76DC00D3C7EB /* Combinable.swift in Sources */,
 			);

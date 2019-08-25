@@ -11,8 +11,8 @@ import Combine
 
 extension Assignment where Base: ColorView {
         
-    func color(_ red: Float, _ green: Float, _ blue: Float) {
-        baseInstance.shiftTo(red, green, blue)
+    func color(_ value: Color.Values) {
+        baseInstance.shiftTo(value)
     }
     
     func isHidden(_ value: Bool) {
