@@ -84,37 +84,3 @@ extension Color.Values {
     }
     
 }
-
-/// Excellent Wrapper Ideas from https://nshipster.com/propertywrapper/
-@propertyWrapper
-struct Clamping<Value: Comparable> {
-    
-    var value: Value
-    let range: ClosedRange<Value>
-    
-    init(wrappedValue value: Value, _ range: ClosedRange<Value>) {
-        self.value = Self.assign(value, using: range)
-        self.range = range
-    }
-
-    var wrappedValue: Value {
-        get { value }
-        set { value = Self.assign(newValue, using: range) }
-    }
-    
-    private static func assign(_ newValue: Value, using agreedRange: ClosedRange<Value>) -> Value {
-        return min(max(agreedRange.lowerBound, newValue), agreedRange.upperBound)
-    }
-    
-}
-
-@propertyWrapper
-struct UnitInterval<Value: FloatingPoint> {
-    
-    @Clamping var wrappedValue: Value
-
-    init(wrappedValue value: Value) {
-        self._wrappedValue = Clamping(wrappedValue: value, 0...1)
-    }
-    
-}
