@@ -12,7 +12,7 @@ import Foundation
 @propertyWrapper
 struct Clamping<Value: Comparable> {
     
-    var value: Value
+    private var value: Value
     let range: ClosedRange<Value>
     
     init(wrappedValue value: Value, _ range: ClosedRange<Value>) {
