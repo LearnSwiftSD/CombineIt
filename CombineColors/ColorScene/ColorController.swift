@@ -26,31 +26,124 @@ class ColorController: UIViewController {
     let textFieldHandler = TextFieldHandler()
     
     // Make a `Cancellables` storage here
+    var cancellables = Cancellables()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = textFieldHandler
         setUpStyle()
-        subscribeToKeyboardNotifications()
         // bind Publishers here
+        bindPublishers()
     }
     
     // MARK: - Publishers
     
-    // Make Some Publishers here
+    lazy var redSliderValue: SharedPublisher<Float, Never> = {
+        redSlider.publisher(for: .valueChanged)
+            .map { $0.value }
+            .prepend(0.0)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+            .share()
+    }()
+    
+    lazy var greenSliderValue: SharedPublisher<Float, Never> = {
+        greenSlider.publisher(for: .valueChanged)
+            .map { $0.value }
+            .prepend(0.0)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+            .share()
+    }()
+    
+    lazy var blueSliderValue: SharedPublisher<Float, Never> = {
+        blueSlider.publisher(for: .valueChanged)
+            .map { $0.value }
+            .prepend(0.0)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+            .share()
+    }()
+    
+    lazy var sliderValues: SharedPublisher<Color.Values, Never> = {
+        Publishers.CombineLatest3(
+            redSliderValue,
+            greenSliderValue,
+            blueSliderValue
+        )
+        .print("Sliders")
+        .map(Color.Values.init)
+        .eraseToAnyPublisher()
+        .share()
+    }()
+    
+    var colorName: AnyPublisher<String, Never> {
+        nameField.publisher(for: .editingChanged)
+            .compactMap { $0.text }
+            .print("Text Entered")
+            .eraseToAnyPublisher()
+    }
+    
+    var keyboardWillShowNotification: AnyPublisher<Notification, Never> {
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillShowNotification)
+            .print("keyboardWillShow")
+            .eraseToAnyPublisher()
+    }
+    
+    var keyboardWillHideNotification: AnyPublisher<Notification, Never> {
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillHideNotification)
+            .print("keyboardWillHide")
+            .eraseToAnyPublisher()
+    }
     
     // MARK: - Subscriptions
     
     func bindPublishers() {
-        // Make Some Subscriptions here
-    }
-    
-    @IBAction func didChangeColor(_ sender: Any) {
-        updateUI(
-            red: redSlider.value,
-            green: greenSlider.value,
-            blue: blueSlider.value
-        )
+        
+        sliderValues
+            .supply(to: colorView.input.color)
+            .store(in: &cancellables)
+        
+        redSliderValue
+            .map(Color.toDecimal)
+            .map(String.init)
+            .supply(to: redValue.input.text)
+            .store(in: &cancellables)
+        
+        greenSliderValue
+            .map(Color.toDecimal)
+            .map(String.init)
+            .supply(to: greenValue.input.text)
+            .store(in: &cancellables)
+        
+        blueSliderValue
+            .map(Color.toDecimal)
+            .map(String.init)
+            .supply(to: blueValue.input.text)
+            .store(in: &cancellables)
+        
+        sliderValues
+            .map { $0.hex }
+            .supply(to: hexValueLabel.input.text)
+            .store(in: &cancellables)
+        
+        // TextField Text Validator for beginning with "Fav "
+        colorName
+            .map { $0.hasPrefix("Fav ") }
+            .removeDuplicates()
+            .map { $0 ? UIColor.green : UIColor.red }
+            .supply(to: nameField.input.textColor)
+            .store(in: &cancellables)
+        
+        keyboardWillShowNotification
+            .supply(to: keyboardWillShow)
+            .store(in: &cancellables)
+        
+        keyboardWillHideNotification
+            .supply(to: keyboardWillHide)
+            .store(in: &cancellables)
     }
     
     func setUpStyle() {
@@ -60,15 +153,6 @@ class ColorController: UIViewController {
                 .font : UIFont.futuraMedium(pt: 18),
                 .foregroundColor : UIColor.lightGray])
         nameField.attributedPlaceholder = pHolderText
-    }
-    
-    func updateUI(red: Float, green: Float, blue: Float) {
-        let colorValues = Color.Values(red: red, green: green, blue: blue)
-        colorView.shiftTo(colorValues)
-        redValue.text = String(colorValues.red)
-        greenValue.text = String(colorValues.green)
-        blueValue.text = String(colorValues.blue)
-        hexValueLabel.text = colorValues.hex
     }
     
 }
@@ -93,31 +177,22 @@ extension ColorController {
         }
     }
     
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        let frame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        guard let keyboardFrame = frame else { return }
-        keyboardClearance(up: true, by: keyboardFrame.height)
+    var keyboardWillShow: (Notification) -> Void {
+        return { [weak self] in
+            guard
+                let self = self,
+                let keyboardFrame = ($0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+                else { return }
+            self.keyboardClearance(up: true, by: keyboardFrame.height)
+        }
     }
     
-    @objc
-    func keyboardWillHide(_ notification: Notification) {
-        keyboardClearance(up: false)
+    var keyboardWillHide: (Notification) -> Void {
+        return { [weak self] _ in
+            guard let self = self else { return }
+            self.keyboardClearance(up: false)
+        }
     }
     
-    func subscribeToKeyboardNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification, object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
 }
 
