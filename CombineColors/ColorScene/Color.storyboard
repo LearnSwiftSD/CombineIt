@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WzB-he-pBM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WzB-he-pBM">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -62,9 +62,6 @@
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vFx-KQ-pDe" userLabel="Red Slider">
                                                 <rect key="frame" x="98.666666666666671" y="0.0" width="238.33333333333331" height="49"/>
                                                 <color key="minimumTrackTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="didChangeColor:" destination="WzB-he-pBM" eventType="valueChanged" id="ELa-hk-imL"/>
-                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -90,9 +87,6 @@
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="anV-17-JvG" userLabel="Green Slider">
                                                 <rect key="frame" x="98.666666666666671" y="0.0" width="238.33333333333331" height="49"/>
                                                 <color key="minimumTrackTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="didChangeColor:" destination="WzB-he-pBM" eventType="valueChanged" id="Fgc-Xo-9wW"/>
-                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
@@ -118,9 +112,6 @@
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QZW-92-xbG" userLabel="Blue Slider">
                                                 <rect key="frame" x="98.666666666666671" y="0.0" width="238.33333333333331" height="49"/>
                                                 <color key="minimumTrackTintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="didChangeColor:" destination="WzB-he-pBM" eventType="valueChanged" id="h1O-GB-EEZ"/>
-                                                </connections>
                                             </slider>
                                         </subviews>
                                         <constraints>
